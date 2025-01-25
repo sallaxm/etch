@@ -19,7 +19,10 @@
 
     <script>
 
-        const container = document.querySelector(".container")
+        const container = document.querySelector(".container");
+        const newBtn = document.querySelector('#newGrid');
+        const clear = document.querySelector('#Clear')
+        
 
         for (let i = 0; i < 256; i++){
 
@@ -27,27 +30,57 @@
             gridDiv.classList.add("gridBox");
             container.appendChild(gridDiv);
         }
+        const gridDivs = document.querySelectorAll(".gridBox");
 
-        const gridDivs = document.querySelectorAll(".gridBox")
-        
         gridDivs.forEach(function(gridDiv){
             gridDiv.addEventListener('mouseenter', function(){
-              gridDiv.style.backgroundColor = 'black';
+                gridDiv.style.backgroundColor = 'black';
+                })
             })
-    })
 
-
-        const newBtn = document.querySelector('#newGrid');
 
         newBtn.addEventListener('click', function() {
 
-            prompt("Enter # of squares per side: ")
+            let sqrNo = prompt("Enter no. of squares per side: ")
+            
+            if (sqrNo > 100){
+                alert("Please enter a number of 100 or less!")}
 
-        })
+            else {
 
-        
+                document.documentElement.style.setProperty('--ratio' , sqrNo)
 
+                container.innerHTML = "";
 
+                for (let i = 0; i < sqrNo**2 ; i++){
+
+                const gridDiv = document.createElement("div");
+                gridDiv.classList.add("gridBox");
+                container.appendChild(gridDiv);
+                    }}
+            
+
+            
+            const gridDivs = document.querySelectorAll(".gridBox");
+
+            gridDivs.forEach(function(gridDiv){
+                gridDiv.addEventListener('mouseenter', function(){
+                    gridDiv.style.backgroundColor = 'black';
+                    })
+             })
+             clear.addEventListener('click',function(){
+                gridDivs.forEach(function(gridDiv){
+                    gridDiv.style.backgroundColor = 'white';
+                })
+            })
+
+            })
+
+            clear.addEventListener('click',function(){
+                gridDivs.forEach(function(gridDiv){
+                    gridDiv.style.backgroundColor = 'white';
+                })
+            })
 
 
     </script>
